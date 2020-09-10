@@ -21,5 +21,12 @@
        android:onClick="onClick"
        android:text="add"/>
 
+   <Button
+       android:id="@+id/cleanBtn"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:onClick="onClick"
+       android:text="clean"/>
+
 
 </LinearLayout>

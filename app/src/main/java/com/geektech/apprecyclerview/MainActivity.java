@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.ItemC
 
     public RecyclerView recyclerView;
     public MainAdapter mainAdapter;
-
     ArrayList<Title> list;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +30,13 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.ItemC
         setContentView(R.layout.activity_main);
 
         init();
+        clean();
 
     }
 
     private void init() {
         //Cоздание экземпляра некоторых классов и инициализация вьюшек
+        button=findViewById(R.id.cleanBtn);
         list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -97,4 +100,15 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.ItemC
 
         }
     }
+
+    public void clean() {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainAdapter.mData.clear();
+                mainAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
 }

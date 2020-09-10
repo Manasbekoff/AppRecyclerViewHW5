@@ -3,6 +3,7 @@ package com.geektech.apprecyclerview;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,8 +14,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.media.CamcorderProfile.get;
 
 public class ActivityTwo extends AppCompatActivity {
 
@@ -72,11 +76,14 @@ public class ActivityTwo extends AppCompatActivity {
             }
         });
 
+
+
+
         //Cоздаем календарь с помощью клика на кнопку date
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
+                final Calendar calendar = Calendar.getInstance();
 
                 final int year = calendar.get(Calendar.YEAR);
                 final int month = calendar.get(Calendar.MONTH);
@@ -84,19 +91,17 @@ public class ActivityTwo extends AppCompatActivity {
 
                 DatePickerDialog dialog = new DatePickerDialog(
                         ActivityTwo.this, new DatePickerDialog.OnDateSetListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
                         ActivityTwo.this.dateOf = new Date(year,month,day);
-
-                        etYear.setText(day + "." + (month+1) + "." + year);
-
+                        etYear.setText(i2 + "." + (i1+1) + "." + i);
                     }
                 },  year,month,day);
                    dialog.show();
             }
         });
-
         // Здесь мы получаем данные из MainActivity и передаем в поля EditText для того чтобы редактировать
         Intent intent = getIntent();
         if (intent !=null) {
@@ -131,5 +136,8 @@ public class ActivityTwo extends AppCompatActivity {
             imageView.setImageURI(imageDate);
 
         }
+    }
+
+    public void setTime(View view) {
     }
 }
